@@ -142,33 +142,6 @@ lab_2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab_2.dir\build.make CMakeFiles/lab_2.dir/build
 .PHONY : lab_2/fast
 
-DynamicArray.obj: DynamicArray.cpp.obj
-
-.PHONY : DynamicArray.obj
-
-# target to build an object file
-DynamicArray.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab_2.dir\build.make CMakeFiles/lab_2.dir/DynamicArray.cpp.obj
-.PHONY : DynamicArray.cpp.obj
-
-DynamicArray.i: DynamicArray.cpp.i
-
-.PHONY : DynamicArray.i
-
-# target to preprocess a source file
-DynamicArray.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab_2.dir\build.make CMakeFiles/lab_2.dir/DynamicArray.cpp.i
-.PHONY : DynamicArray.cpp.i
-
-DynamicArray.s: DynamicArray.cpp.s
-
-.PHONY : DynamicArray.s
-
-# target to generate assembly for a file
-DynamicArray.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\lab_2.dir\build.make CMakeFiles/lab_2.dir/DynamicArray.cpp.s
-.PHONY : DynamicArray.cpp.s
-
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -205,9 +178,6 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... lab_2
-	@echo ... DynamicArray.obj
-	@echo ... DynamicArray.i
-	@echo ... DynamicArray.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

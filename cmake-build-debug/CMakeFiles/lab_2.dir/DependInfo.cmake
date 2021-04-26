@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/AntonLvov/CLionProjects/lab#2/DynamicArray.cpp" "C:/Users/AntonLvov/CLionProjects/lab#2/cmake-build-debug/CMakeFiles/lab_2.dir/DynamicArray.cpp.obj"
   "C:/Users/AntonLvov/CLionProjects/lab#2/main.cpp" "C:/Users/AntonLvov/CLionProjects/lab#2/cmake-build-debug/CMakeFiles/lab_2.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

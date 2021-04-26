@@ -80,12 +80,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/AntonLvov/CLionProjects/lab#2/DynamicArray.cpp">
-			<Option target="lab_2"/>
-		</Unit>
-		<Unit filename="C:/Users/AntonLvov/CLionProjects/lab#2/DynamicArray.h">
-			<Option target="lab_2"/>
-		</Unit>
 		<Unit filename="C:/Users/AntonLvov/CLionProjects/lab#2/main.cpp">
 			<Option target="lab_2"/>
 		</Unit>

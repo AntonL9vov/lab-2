@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include "cstring"
+#include "IndexOutOfRangeException.h"
 
 
 template <class T>
@@ -20,7 +21,7 @@ public:
     DynamicArray(T* items, int count) {
         length = 0;
         if(count>0){
-            array = (T *) malloc(count*sizeOfElement);
+            array = new T[count];
             for(; length<count; length++){
                 array[length] = items[length];
             }
@@ -29,38 +30,55 @@ public:
 
     DynamicArray(int size) {
         length = size;
-        array = (T *) malloc(size*sizeOfElement);
+        array = new T[size];
         for(int i = 0; i<size; i++) array[i] = 0;
     }
 
     DynamicArray(const DynamicArray<T> &dynamicArray ) {
         length = 0;
-        array = (T *) malloc(dynamicArray.length*sizeOfElement);
+        array = new T[dynamicArray.length];
         for(; length<dynamicArray.length; length++){
             array[length] = dynamicArray.array[length];
         }
     }
 
     ~DynamicArray(){
+        delete[] array;
     }
 
     T Get(int index) {
-
+        if(index+1>length||index<0){
+            IndexOutOfRange ex;
+            std::cout << ex.error1 << std::endl;
+            return 0;
+        }else{
+            return array[index];
+        }
     }
 
     int GetSize() {
-
+        return length;
     }
 
     void Set(int index, T value) {
-
+        if(index+1>length||index<0){
+            IndexOutOfRange ex;
+            std::cout << ex.error1 << std::endl;
+        }else{
+            array[index] = value;
+        }
     }
 
     void Resize(int newSize){
+        T *newArr = new T[newSize];
+        for (int i = 0; i < newSize; ++i) {
+            newArr[i] = array[i%length];
+        }
+        length = newSize;
+        delete[] array;
+        array = newArr;    }
 
-    }
-
-    void Print() {
+    void print() {
         for(int i = 0; i<length; i++){
             std::cout << array[i] << " ";
         }

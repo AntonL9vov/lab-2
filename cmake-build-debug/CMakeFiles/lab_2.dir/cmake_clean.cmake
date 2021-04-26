@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/lab_2.dir/DynamicArray.cpp.obj"
   "CMakeFiles/lab_2.dir/main.cpp.obj"
   "lab_2.exe"
   "lab_2.exe.manifest"
