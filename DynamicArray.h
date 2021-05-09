@@ -18,6 +18,8 @@ private:
     int length;
     size_t sizeOfElement = sizeof(T);
 public:
+    DynamicArray(){}
+
     DynamicArray(T* items, int count) {
         length = 0;
         if(count>0){
@@ -42,18 +44,13 @@ public:
         }
     }
 
-    ~DynamicArray(){
+    /*~DynamicArray(){
         delete[] array;
-    }
+    }*/
 
     T Get(int index) {
-        if(index+1>length||index<0){
-            IndexOutOfRange ex;
-            std::cout << ex.error1 << std::endl;
-            return 0;
-        }else{
-            return array[index];
-        }
+        if(index>length||index<0) throw IndexOutOfRange();
+        return array[index];
     }
 
     int GetSize() {
@@ -61,7 +58,7 @@ public:
     }
 
     void Set(int index, T value) {
-        if(index+1>length||index<0){
+        if(index>length||index<0){
             IndexOutOfRange ex;
             std::cout << ex.error1 << std::endl;
         }else{
@@ -76,13 +73,11 @@ public:
         }
         length = newSize;
         delete[] array;
-        array = newArr;    }
+        array = newArr;
+    }
 
-    void print() {
-        for(int i = 0; i<length; i++){
-            std::cout << array[i] << " ";
-        }
-        std::cout << std::endl;
+    int GetLength() {
+        return length;
     }
 };
 

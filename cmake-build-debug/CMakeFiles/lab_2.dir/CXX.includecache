@@ -6,15 +6,35 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/AntonLvov/CLionProjects/lab#2/ArraySequence.h
+Sequence.h
+C:/Users/AntonLvov/CLionProjects/lab#2/Sequence.h
+DynamicArray.h
+C:/Users/AntonLvov/CLionProjects/lab#2/DynamicArray.h
+
+C:/Users/AntonLvov/CLionProjects/lab#2/DynamicArray.h
+string
+-
+iostream
+-
+cstring
+C:/Users/AntonLvov/CLionProjects/lab#2/cstring
+IndexOutOfRangeException.h
 C:/Users/AntonLvov/CLionProjects/lab#2/IndexOutOfRangeException.h
 
-C:/Users/AntonLvov/CLionProjects/lab#2/LinkedList.h
+C:/Users/AntonLvov/CLionProjects/lab#2/IndexOutOfRangeException.h
+
+C:/Users/AntonLvov/CLionProjects/lab#2/Matrix.h
+ArraySequence.h
+C:/Users/AntonLvov/CLionProjects/lab#2/ArraySequence.h
+
+C:/Users/AntonLvov/CLionProjects/lab#2/Sequence.h
 IndexOutOfRangeException.h
 C:/Users/AntonLvov/CLionProjects/lab#2/IndexOutOfRangeException.h
 
 C:/Users/AntonLvov/CLionProjects/lab#2/main.cpp
 iostream
 -
-LinkedList.h
-C:/Users/AntonLvov/CLionProjects/lab#2/LinkedList.h
+Matrix.h
+C:/Users/AntonLvov/CLionProjects/lab#2/Matrix.h
 
