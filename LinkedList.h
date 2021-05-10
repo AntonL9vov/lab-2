@@ -7,6 +7,7 @@
 
 #endif //LAB_2_LINKEDLIST_H
 #include "IndexOutOfRangeException.h"
+#include <iostream>
 
 template <class T>
 class LinkedList{
@@ -70,34 +71,18 @@ public:
     }
 
     T GetFirst(){
-        if(head == nullptr){
-            IndexOutOfRange indexOutOfRange;
-            std::cout << indexOutOfRange.error2 << std::endl;
-            return 0;
-        }
+        if(head == nullptr) throw IndexOutOfRange();
         return head->data;
     }
 
     T GetLast(){
-        if(head == nullptr){
-            IndexOutOfRange indexOutOfRange;
-            std::cout << indexOutOfRange.error2 << std::endl;
-            return 0;
-        }
+        if(head == nullptr) throw IndexOutOfRange();
         return end->data;
     }
 
     T Get(int index){
-        if(head == nullptr){
-            IndexOutOfRange indexOutOfRange;
-            std::cout << indexOutOfRange.error2 << std::endl;
-            return 0;
-        }
-        if (index>len-1||index<0){
-            IndexOutOfRange indexOutOfRange;
-            std::cout << indexOutOfRange.error1 << std::endl;
-            return 0;
-        }
+        if(head == nullptr) throw IndexOutOfRange();
+        if (index>len-1||index<0) throw IndexOutOfRange();
         element *element1 = new element;
         element1 = head;
         for (int i = 0; i < index; ++i) {
@@ -107,15 +92,12 @@ public:
     }
 
     LinkedList<T> *GetSubList(int startIndex, int endIndex){
-        if(head == nullptr){
-            IndexOutOfRange indexOutOfRange;
-            std::cout << indexOutOfRange.error2 << std::endl;
-            return nullptr;
-        }
-        if (endIndex>len-1||startIndex>len-1||startIndex<0||endIndex<0){
-            IndexOutOfRange indexOutOfRange;
-            std::cout << indexOutOfRange.error1 << std::endl;
-            return nullptr;
+        if(head == nullptr) throw IndexOutOfRange();
+        if (endIndex>len-1||startIndex>len-1||startIndex<0||endIndex<0||startIndex==endIndex) throw IndexOutOfRange();
+        if(startIndex>endIndex){
+            int a = startIndex;
+            startIndex = endIndex;
+            endIndex = a;
         }
         element *element1 = new element;
         element1 = head;
@@ -136,16 +118,8 @@ public:
     }
 
     void InsertAt(T item, int index){
-        if(head == nullptr){
-            IndexOutOfRange indexOutOfRange;
-            std::cout << indexOutOfRange.error2 << std::endl;
-            return;
-        }
-        if (index>len-1||index<0){
-            IndexOutOfRange indexOutOfRange;
-            std::cout << indexOutOfRange.error1 << std::endl;
-            return;
-        }
+        if(head == nullptr) throw IndexOutOfRange();
+        if (index>len-1||index<0) throw IndexOutOfRange();
         element *element1 = new element;
         element1 = head;
         for (int i = 0; i < index; ++i) {
@@ -167,13 +141,5 @@ public:
         return linkedList;
     }
 
-    void Print(){
-        element *element1 = new element;
-        element1 = head;
-        while (element1){
-            std::cout << element1->data << " ";
-            element1 = element1->next;
-        }
-        std::cout << std::endl;
-    }
+    std::ostream &operator <<()
 };

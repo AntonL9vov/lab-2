@@ -7,6 +7,7 @@
 
 #endif //LAB_2_MATRIX_H
 #include "ArraySequence.h"
+#include "NotCompatibleTypesException.h"
 
 template <class T>
 class Matrix{
@@ -91,10 +92,19 @@ public:
         }
     }
 
-    void addToLine(int line, float a){
-        if(line<1||line>height) throw IndexOutOfRange();
+    void addLineToLine(Matrix<T> matrix, int first, int second){
+        if(elementSize!=matrix.elementSize) throw NotCompatibleTypes();
+        if(first<1||first>height||second<1||second>height) throw IndexOutOfRange();
         for (int i = 0; i < length; ++i) {
-            arraySequence.InsertAt(arraySequence.Get((line-1)*length+i)+a, (line-1)*length+i);
+            arraySequence.InsertAt(arraySequence.Get((first-1)*length + i) + matrix.arraySequence.Get(second-1*length + i), first);
+        }
+    }
+
+    void subLineToLine(Matrix<T> matrix,int first, int second){
+        if(elementSize!=matrix.elementSize) throw NotCompatibleTypes();
+        if(first<1||first>height||second<1||second>height) throw IndexOutOfRange();
+        for (int i = 0; i < length; ++i) {
+            arraySequence.InsertAt(arraySequence.Get((first-1)*length + i) - matrix.arraySequence.Get(second-1*length + i), first);
         }
     }
 

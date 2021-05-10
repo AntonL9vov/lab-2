@@ -24,12 +24,12 @@ public:
     }
 
     T GetFirst(){
-        if(linkedList.len == 0) throw IndexOutOfRange;
+        if(linkedList.len == 0) throw IndexOutOfRange();
         return linkedList.GetFirst();
     }
 
     T GetLast(){
-        if(linkedList.GetLength() == 0) throw IndexOutOfRange;
+        if(linkedList.GetLength() == 0) throw IndexOutOfRange();
         return linkedList.GetLast();
     }
 
