@@ -25,16 +25,32 @@ C:/Users/AntonLvov/CLionProjects/lab#2/IndexOutOfRangeException.h
 C:/Users/AntonLvov/CLionProjects/lab#2/IndexOutOfRangeException.h
 
 C:/Users/AntonLvov/CLionProjects/lab#2/Matrix.h
-ArraySequence.h
-C:/Users/AntonLvov/CLionProjects/lab#2/ArraySequence.h
+Vector.h
+C:/Users/AntonLvov/CLionProjects/lab#2/Vector.h
+NotCompatibleTypesException.h
+C:/Users/AntonLvov/CLionProjects/lab#2/NotCompatibleTypesException.h
+
+C:/Users/AntonLvov/CLionProjects/lab#2/NotCompatibleTypesException.h
 
 C:/Users/AntonLvov/CLionProjects/lab#2/Sequence.h
 IndexOutOfRangeException.h
 C:/Users/AntonLvov/CLionProjects/lab#2/IndexOutOfRangeException.h
 
+C:/Users/AntonLvov/CLionProjects/lab#2/Vector.h
+ArraySequence.h
+C:/Users/AntonLvov/CLionProjects/lab#2/ArraySequence.h
+
 C:/Users/AntonLvov/CLionProjects/lab#2/main.cpp
 iostream
 -
+menu.h
+C:/Users/AntonLvov/CLionProjects/lab#2/menu.h
+
+C:/Users/AntonLvov/CLionProjects/lab#2/menu.h
 Matrix.h
 C:/Users/AntonLvov/CLionProjects/lab#2/Matrix.h
+iostream
+C:/Users/AntonLvov/CLionProjects/lab#2/iostream
+complex
+-
 

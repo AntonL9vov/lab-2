@@ -6,7 +6,7 @@
 #define LAB_2_MATRIX_H
 
 #endif //LAB_2_MATRIX_H
-#include "ArraySequence.h"
+#include "Vector.h"
 #include "NotCompatibleTypesException.h"
 
 template <class T>
@@ -108,13 +108,15 @@ public:
         }
     }
 
-    void print(){
-        std::cout<<""<<std::endl;
-        for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < length; ++j) {
-                std::cout<<arraySequence.Get(i*length + j)<<" ";
+
+    friend std::ostream& operator<<(std::ostream &out, Matrix &matrix){
+        out<<""<<std::endl;
+        for (int i = 0; i < matrix.height; ++i) {
+            for (int j = 0; j < matrix.length; ++j) {
+                out<<matrix.arraySequence.Get(i*matrix.length + j)<<" ";
             }
-            std::cout<<""<<std::endl;
+           out<<""<<std::endl;
         }
+        return out;
     }
 };

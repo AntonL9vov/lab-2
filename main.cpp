@@ -1,7 +1,8 @@
 #include <iostream>
-#include "Matrix.h"
+#include "menu.h"
 
 
 int main() {
+    menu();
     return 0;
 }

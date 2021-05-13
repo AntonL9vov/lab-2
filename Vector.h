@@ -88,11 +88,12 @@ public:
         return vector1;
     }
 
-    void print(){
-        std::cout<<"{";
-        for (int i = 0; i < dimension - 1; ++i) {
-            std::cout<<arraySequence.Get(i)<<", ";
+    friend std::ostream& operator<<(std::ostream &out, Vector &vector){
+        out<<"{";
+        for (int i = 0; i < vector.dimension - 1; ++i) {
+            out<<vector.arraySequence.Get(i)<<", ";
         }
-        std::cout<<arraySequence.Get(dimension-1)<<"}"<<std::endl;
+        out<<vector.arraySequence.Get(vector.dimension-1)<<"}"<<std::endl;
+        return out;
     }
 };
