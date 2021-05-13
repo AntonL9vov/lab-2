@@ -18,7 +18,10 @@ private:
     int length;
     size_t sizeOfElement = sizeof(T);
 public:
-    DynamicArray(){}
+    DynamicArray(){
+        length = 0;
+        array = nullptr;
+    }
 
     DynamicArray(T* items, int count) {
         length = 0;

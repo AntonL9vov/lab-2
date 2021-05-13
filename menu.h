@@ -17,12 +17,16 @@ using namespace std;
 int GetInt(){
     int a;
     cin>>a;
+    if (a<1){
+        cout<<"Number is out of range. Try again:";
+        GetInt();
+    }
     return a;
 }
 
 int GetInt(int lower, int upper){
     int a;
-    cout<<"Input number:";
+    cout<<"Input number: ";
     cin>>a;
     if(a>upper||a<lower){
         cout<<"Number is out of range, try again";
@@ -30,17 +34,59 @@ int GetInt(int lower, int upper){
     }
     return a;
 }
+int getNumber(int a){
+    int b;
+    cin>>b;
+    return b;
+}
+
+float getNumber(float a){
+    int b;
+    cin>>b;
+    return b;
+}
+
+complex<float> getNumber(complex<float> a){
+    float b, c;
+    cout<<"Input real part: ";
+    cin>>b;
+    cout<<endl<<"Input imaginary part: ";
+    cin>>c;
+    complex<float> num = complex<float>(b,c);
+    return num;
+}
 
 int randomInt() {
     return rand()%1000;
 }
 
 float randomFloat() {
-    return (float)randomInt() + (float)randomInt()/(float)randomInt();
+    return static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/100));
 }
 
 complex<int> randomComplex() {
-    return complex<int>(randomInt(), randomInt());
+    return complex<int>(randomFloat(), randomFloat());
+}
+
+ostream& operator << (ostream& cout, complex<float> com){
+    if (com.imag() == 0) return cout << com.real();
+
+    if (com.real() != 0) {
+        cout << com.real();
+    }
+
+    if (com.imag() > 0) {
+        if (com.real() != 0)
+            cout << '+';
+        if (com.imag() != 1)
+            cout << com.imag();
+        return cout << 'i';
+    }
+    else {
+        if (com.imag() == -1)
+            return cout << "-i";
+        return cout << com.imag() << 'i';
+    }
 }
 
 void printMenu(){
@@ -65,7 +111,24 @@ void printMenu(){
     cout<<"17. Remove matrix from memory."<<endl;
 }
 
-void createIntVector(ArraySequence<Vector<int>*> vectorInt, int dimension){
+template<class T>
+void createVector(ArraySequence<Vector<T>*> array, int dimension){
+    cout<<"Input coordinates:"<<endl;
+    T a = getNumber(a);
+    T *r = new T[1];
+    r[0] = a;
+    ArraySequence<T> *arraySequence = new ArraySequence<T>(r, 1);
+    for (int i = 0; i < dimension; ++i) {
+        cout<<"Input "<<i<<" coordinate";
+        arraySequence->Append(getNumber(a));
+        cout<<endl;
+    }
+    auto *vector = new Vector<T>(arraySequence);
+    cout<<"it is your new vector: "<<*vector<<endl;
+    array->Append(vector);
+};
+
+void createIntVector(ArraySequence<Vector<int>*> *vectorInt, int dimension){
     int *a = new int[dimension];
     cout<<"Input coordinates:"<<endl;
     for (int i = 0; i < dimension; ++i) {
@@ -73,22 +136,24 @@ void createIntVector(ArraySequence<Vector<int>*> vectorInt, int dimension){
         a[i] = GetInt();
         cout<<endl;
     }
-    Vector<int> *vector = new Vector<int>(a, dimension);
+    auto *vector = new Vector<int>(a, dimension);
+    cout<<vector->GetDimension();
     cout<<"it is your new vector: "<<*vector<<endl;
-    vectorInt.Append(vector);
+    vectorInt->Append(vector);
 }
 
-void createRandomIntVector(ArraySequence<Vector<int>*> vectorInt, int dimension){
+void createRandomIntVector(ArraySequence<Vector<int>*> *vectorInt, int dimension){
     int *a = new int[dimension];
     for (int i = 0; i < dimension; ++i) {
         a[i] = randomInt();
     }
-    Vector<int> *vector = new Vector<int>(a, dimension);
+    auto *vector = new Vector<int>(a, dimension);
+    cout<<vector->GetDimension();
     cout<<"it is your new vector: "<<*vector<<endl;
-    vectorInt.Append(vector);
+    vectorInt->Append(vector);
 }
 
-void createFloatVector(ArraySequence<Vector<float>*> vectorFloat, int dimension){
+void createFloatVector(ArraySequence<Vector<float>*> *vectorFloat, int dimension){
     float *a = new float[dimension];
     cout<<"Input coordinates:"<<endl;
     for (int i = 0; i < dimension; ++i) {
@@ -98,20 +163,20 @@ void createFloatVector(ArraySequence<Vector<float>*> vectorFloat, int dimension)
     }
     Vector<float> *vector = new Vector<float>(a, dimension);
     cout<<"it is your new vector: "<<*vector<<endl;
-    vectorFloat.Append(vector);
+    vectorFloat->Append(vector);
 }
 
-void createRandomFloatVector(ArraySequence<Vector<float>*> vectorFloat, int dimension){
+void createRandomFloatVector(ArraySequence<Vector<float>*> *vectorFloat, int dimension){
     float *a = new float[dimension];
     for (int i = 0; i < dimension; ++i) {
         a[i] = randomFloat();
     }
     Vector<float> *vector = new Vector<float>(a, dimension);
     cout<<"it is your new vector: "<<*vector<<endl;
-    vectorFloat.Append(vector);
+    vectorFloat->Append(vector);
 }
 
-void createComplexVector(ArraySequence<Vector<complex<float>>*> vectorComplex, int dimension){
+void createComplexVector(ArraySequence<Vector<complex<float>>*> *vectorComplex, int dimension){
     float *a = new float[dimension];
     float *b = new float[dimension];
     cout<<"Input coordinates:"<<endl;
@@ -128,10 +193,10 @@ void createComplexVector(ArraySequence<Vector<complex<float>>*> vectorComplex, i
     }
     Vector<complex<float>> *vector = new Vector<complex<float>>(c, dimension);
     cout<<"it is your new vector: "<<*vector<<endl;
-    vectorComplex.Append(vector);
+    vectorComplex->Append(vector);
 }
 
-void createRandomComplexVector(ArraySequence<Vector<complex<float>>*> vectorComplex, int dimension){
+void createRandomComplexVector(ArraySequence<Vector<complex<float>>*> *vectorComplex, int dimension){
     float *a = new float[dimension];
     float *b = new float[dimension];
     for (int i = 0; i < dimension; ++i) {
@@ -144,17 +209,20 @@ void createRandomComplexVector(ArraySequence<Vector<complex<float>>*> vectorComp
     }
     Vector<complex<float>> *vector = new Vector<complex<float>>(c, dimension);
     cout<<"it is your new vector: "<<*vector<<endl;
-    vectorComplex.Append(vector);
+    vectorComplex->Append(vector);
 }
 
-void getVector(ArraySequence<Vector<int>*> vectorInt, ArraySequence<Vector<float>*> vectorFloat, ArraySequence<Vector<complex<float>>*> vectorComplex){
-    cout<<"Input vector dimension:"<<endl;
+void getVector(ArraySequence<Vector<int>*> *vectorInt, ArraySequence<Vector<float>*> *vectorFloat, ArraySequence<Vector<complex<float>>*> *vectorComplex){
+    cout<<"---------"<<endl;
+    cout<<"Input vector dimension: ";
     int dimension = GetInt();
     int ch;
+    cout<<endl;
     cout<<"How do you want to input your vector?"<<endl;
     cout<<"1. Randomly."<<endl;
     cout<<"2. By myself."<<endl;
     ch = GetInt(1, 2);
+    cout<<endl;
     cout<<"What type of vector do you want?"<<endl;
     cout<<"1. Int."<<endl;
     cout<<"2. Float."<<endl;
@@ -184,6 +252,7 @@ void getVector(ArraySequence<Vector<int>*> vectorInt, ArraySequence<Vector<float
             break;
         default: break;
     }
+    cout<<"---------"<<endl;
 }
 
 void menu(){
@@ -208,14 +277,14 @@ void menu(){
         cout << "6.  Operate with matrices."<<endl;
         cout << "7.  Remove vector from memory."<<endl;
         cout << "8.  Remove matrix from memory."<<endl;
-        cout << "9. Exit."<<endl;
+        cout << "9.  Exit."<<endl;
 
-        number = GetInt(1,8);
+        number = GetInt(1,9);
 
         if(number == 9) break;
 
         switch (number) {
-            case 1: getVector(vectorInt, vectorFloat, vectorComplex);
+            case 1: getVector(&vectorInt, &vectorFloat, &vectorComplex);
                 break;
             case 2: break;
             case 3: break;

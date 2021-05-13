@@ -96,4 +96,8 @@ public:
         out<<vector.arraySequence.Get(vector.dimension-1)<<"}"<<std::endl;
         return out;
     }
+
+    int GetDimension(){
+        return dimension;
+    }
 };

@@ -61,10 +61,15 @@ public:
     }
 
     void Append(T item){
+        int a = GetLength();
+        std::cout<<GetLength();
         dynamicArray.Resize(GetLength());
         dynamicArray.Set(GetLength()-1, item);
     }
 
+    void Append(T *item){
+        Append(*item);
+    }
     void Prepend(T item){
         dynamicArray.Resize(GetLength());
         for (int i = GetLength()-1; i > 0; --i) {
