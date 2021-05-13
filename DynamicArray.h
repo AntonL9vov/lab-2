@@ -61,18 +61,20 @@ public:
     }
 
     void Set(int index, T value) {
-        if(index>length||index<0){
-            IndexOutOfRange ex;
-            std::cout << ex.error1 << std::endl;
-        }else{
-            array[index] = value;
-        }
+        if(index>length||index<0) throw IndexOutOfRange();
+        array[index] = value;
     }
 
     void Resize(int newSize){
         T *newArr = new T[newSize];
-        for (int i = 0; i < newSize; ++i) {
-            newArr[i] = array[i%length];
+        if(array == nullptr){
+            for (int i = 0; i < newSize; ++i) {
+                newArr[i] = 0;
+            }
+        }else {
+            for (int i = 0; i < newSize; ++i) {
+                newArr[i] = array[i % length];
+            }
         }
         length = newSize;
         delete[] array;
@@ -81,6 +83,15 @@ public:
 
     int GetLength() {
         return length;
+    }
+
+    friend std::ostream& operator<<(std::ostream &out, DynamicArray dynamicArray){
+        out<<""<<std::endl;
+        for (int i = 0; i < dynamicArray.length; ++i) {
+            out<<dynamicArray.Get(i);
+        }
+        out<<""<<std::endl;
+        return out;
     }
 };
 

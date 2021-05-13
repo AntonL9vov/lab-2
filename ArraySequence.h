@@ -61,9 +61,7 @@ public:
     }
 
     void Append(T item){
-        int a = GetLength();
-        std::cout<<GetLength();
-        dynamicArray.Resize(GetLength());
+        dynamicArray.Resize(GetLength()+1);
         dynamicArray.Set(GetLength()-1, item);
     }
 
@@ -98,5 +96,14 @@ public:
         T item = Get(index1);
         InsertAt(Get(index2), index1);
         InsertAt(item, index2);
+    }
+
+    friend std::ostream& operator<<(std::ostream &out, ArraySequence arraySequence){
+        out<<""<<std::endl;
+        for (int i = 0; i < arraySequence.GetLength(); ++i) {
+            out<<arraySequence.Get(i)<<" ";
+        }
+        out<<""<<std::endl;
+        return out;
     }
 };
