@@ -454,6 +454,12 @@ void showAvailableMatrix(ArraySequence<Matrix<int>*> *matrixInt, ArraySequence<M
     cout<<"---------"<<endl;
 }
 
+void operateWithVectors(ArraySequence<Vector<int>*> *vectorInt, ArraySequence<Vector<float>*> *vectorFloat, ArraySequence<Vector<complex<float>>*> *vectorComplex){
+    cout<<"---------"<<endl;
+    cout<<"What do you want to do with vector";
+    cout<<"Sum two vectors";
+    cout<<"Sub two vectors";
+}
 
 void menu(){
     ArraySequence<Vector<int>*> vectorInt;
