@@ -100,4 +100,9 @@ public:
     int GetDimension(){
         return dimension;
     }
+
+    T GetCoordinate(int i){
+        if (i<1||i>dimension) throw IndexOutOfRange();
+        return arraySequence.Get(i-1);
+    }
 };

@@ -136,7 +136,6 @@ void createRandomIntVector(ArraySequence<Vector<int>*> *vectorInt, int dimension
         a[i] = randomInt();
     }
     auto *vector = new Vector<int>(a, dimension);
-    cout<<vector->GetDimension();
     cout<<"it is your new vector: "<<*vector<<endl;
     vectorInt->Append(vector);
 }
@@ -168,7 +167,7 @@ void createRandomComplexVector(ArraySequence<Vector<complex<float>>*> *vectorCom
 }
 
 void getVector(ArraySequence<Vector<int>*> *vectorInt, ArraySequence<Vector<float>*> *vectorFloat, ArraySequence<Vector<complex<float>>*> *vectorComplex){
-    cout<<"---------"<<endl;
+    cout<<"---------";
     int ch;
     cout<<endl;
     cout<<"What type of vector do you want?"<<endl;
@@ -334,6 +333,128 @@ void getMatrix(ArraySequence<Matrix<int>*> *matrixInt, ArraySequence<Matrix<floa
     cout<<"---------"<<endl;
 }
 
+template<class T>
+void printVectorsFromMemory(ArraySequence<Vector<T>*> *arraySequence){
+    for (int i = 0; i < arraySequence->GetLength(); ++i) {
+        cout<<i+1<<": ";
+        cout<<"{";
+        if(arraySequence->Get(i)->GetDimension()<4){
+            for (int j = 0; j < arraySequence->Get(i)->GetDimension(); ++j) {
+                if(j!=0) cout<<", ";
+                cout<<arraySequence->Get(i)->GetCoordinate(j+1);
+            }
+            cout<<"}";
+        }else{
+            for (int j = 0; j < 3; ++j) {
+                cout<<arraySequence->Get(i)->GetCoordinate(j+1)<<", ";
+            }
+            cout<<"...}";
+        }
+        cout<<" | ";
+    }
+    cout<<endl;
+}
+
+void showAvailableVector(ArraySequence<Vector<int>*> *vectorInt, ArraySequence<Vector<float>*> *vectorFloat, ArraySequence<Vector<complex<float>>*> *vectorComplex){
+    cout<<"---------";
+    cout<<"What type do you want to look at?"<<endl;
+    cout<<"1. Int."<<endl;
+    cout<<"2. Float."<<endl;
+    cout<<"3. Complex."<<endl;
+    int a = GetInt(1, 3);
+    switch (a) {
+        case 1:
+            printVectorsFromMemory(vectorInt);
+            break;
+        case 2:
+            printVectorsFromMemory(vectorFloat);
+            break;
+        case 3:
+            printVectorsFromMemory(vectorComplex);
+            break;
+        default: break;
+    }
+    cout<<"---------"<<endl;
+}
+
+template<class T>
+void printMatrixFromMemory(ArraySequence<Matrix<T>*> *arraySequence) {
+    for (int k = 0; k < arraySequence->GetLength(); ++k) {
+        cout<<k+1<<": ";
+        if(arraySequence->Get(k)->GetLength()<4) {
+            if (arraySequence->Get(k)->GetHeight()<4) {
+                for (int i = 0; i < arraySequence->Get(k)->GetHeight(); ++i) {
+                    for (int j = 0; j < arraySequence->Get(k)->GetLength(); ++j) {
+                        cout<<arraySequence->Get(k)->GetElement(i,j)<<" ";
+                    }
+                    cout<<""<<endl;
+                    cout<<"    ";
+                }
+                cout<<endl;
+            }else {
+                for (int i = 0; i < 3; ++i) {
+                    for (int j = 0; j < arraySequence->Get(k)->GetLength(); ++j) {
+                        cout<<arraySequence->Get(k)->GetElement(i,j)<<" ";
+                    }
+                    cout<<""<<endl;
+                    cout<<"    ";
+                }
+                for (int i = 0; i <  arraySequence->Get(k)->GetLength(); ++i) {
+                    cout<<"... ";
+                }
+                cout<<endl;
+            }
+        }else{
+            if (arraySequence->Get(k)->GetHeight()<4) {
+                for (int i = 0; i < arraySequence->Get(k)->GetHeight(); ++i) {
+                    for (int j = 0; j < 3; ++j) {
+                        cout<<arraySequence->Get(k)->GetElement(i,j)<<" ";
+                    }
+                    cout<<"... ";
+                    cout<<""<<endl;
+                    cout<<"    ";
+                }
+            }else {
+                for (int i = 0; i < 3; ++i) {
+                    for (int j = 0; j < 3; ++j) {
+                        cout<<arraySequence->Get(k)->GetElement(i,j)<<" ";
+                    }
+                    cout<<"...";
+                    cout<<""<<endl;
+                    cout<<"    ";
+                }
+                for (int i = 0; i <  3; ++i) {
+                    cout<<"...";
+                }
+                cout<<endl;
+            }
+        }
+    }
+}
+
+void showAvailableMatrix(ArraySequence<Matrix<int>*> *matrixInt, ArraySequence<Matrix<float>*> *matrixFloat, ArraySequence<Matrix<complex<float>>*> *matrixComplex){
+    cout<<"---------"<<endl;
+    cout<<"What type do you want to look at?"<<endl;
+    cout<<"1. Int."<<endl;
+    cout<<"2. Float."<<endl;
+    cout<<"3. Complex."<<endl;
+    int a = GetInt(1, 3);
+    switch (a) {
+        case 1:
+            printMatrixFromMemory(matrixInt);
+            break;
+        case 2:
+            printMatrixFromMemory(matrixFloat);
+            break;
+        case 3:
+            printMatrixFromMemory(matrixComplex);
+            break;
+        default: break;
+    }
+    cout<<"---------"<<endl;
+}
+
+
 void menu(){
     ArraySequence<Vector<int>*> vectorInt;
     ArraySequence<Vector<float>*> vectorFloat;
@@ -363,13 +484,18 @@ void menu(){
         if(number == 9) break;
 
         switch (number) {
-            case 1: getVector(&vectorInt, &vectorFloat, &vectorComplex);
+            case 1:
+                getVector(&vectorInt, &vectorFloat, &vectorComplex);
                 break;
             case 2:
                 getMatrix(&matrixInt, &matrixFloat, &matrixComplex);
                 break;
-            case 3: break;
-            case 4: break;
+            case 3:
+                showAvailableVector(&vectorInt, &vectorFloat, &vectorComplex);
+                break;
+            case 4:
+                showAvailableMatrix(&matrixInt, &matrixFloat, &matrixComplex);
+                break;
             case 5: break;
             case 6: break;
             case 7: break;

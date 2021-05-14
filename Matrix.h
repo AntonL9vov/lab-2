@@ -119,4 +119,16 @@ public:
         }
         return out;
     }
+
+    int GetLength(){
+        return length;
+    }
+
+    int GetHeight(){
+        return height;
+    }
+
+    T GetElement(int i, int j){
+        return arraySequence.Get(i*length + j);
+    }
 };
