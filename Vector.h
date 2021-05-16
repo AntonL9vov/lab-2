@@ -18,6 +18,11 @@ public:
     Vector(){
     }
 
+    Vector(Vector<T> &vector){
+        arraySequence = ArraySequence<T>(vector.arraySequence);
+        this->dimension = vector.arraySequence.GetLength();
+    }
+
     Vector(const ArraySequence<T> &arraySequence1){
         arraySequence = ArraySequence<T>(arraySequence1);
         dimension = arraySequence.GetLength();
@@ -31,14 +36,23 @@ public:
     Vector<T> *addVectors(Vector<T> vector){
         if(elementSize != vector.elementSize) return nullptr;
         ArraySequence<T> arraySequence1;
+        T *a;
         if (dimension == vector.dimension || dimension>vector.dimension){
-            arraySequence1 = ArraySequence<T>(arraySequence);
+            a = new T[dimension];
+            for (int i = 0; i < dimension; ++i) {
+                a[i] = arraySequence.Get(i);
+            }
+            arraySequence1 = ArraySequence<T>(a, dimension);
         }else{
-            arraySequence1 = ArraySequence<T>(vector.arraySequence);
+            a = new T[vector.dimension];
+            for (int i = 0; i < vector.dimension; ++i) {
+                a[i] = vector.arraySequence.Get(i);
+            }
+            arraySequence1 = ArraySequence<T>(a, dimension);
         }
-        int a = dimension;
-        if (a>vector.dimension) a = vector.dimension;
-        for (int i = 0; i < a; ++i) {
+        int b = dimension;
+        if (b>vector.dimension) b = vector.dimension;
+        for (int i = 0; i < b; ++i) {
             arraySequence1.InsertAt(vector.arraySequence.Get(i) + arraySequence.Get(i), i);
         }
         Vector<T> *vector1 = new Vector<T>(arraySequence1);
@@ -48,14 +62,23 @@ public:
     Vector<T> *subVectors(Vector<T> vector){
         if(elementSize != vector.elementSize) return nullptr;
         ArraySequence<T> arraySequence1;
+        T *a;
         if (dimension == vector.dimension || dimension>vector.dimension){
-            arraySequence1 = arraySequence;
+            a = new T[dimension];
+            for (int i = 0; i < dimension; ++i) {
+                a[i] = arraySequence.Get(i);
+            }
+            arraySequence1 = ArraySequence<T>(a, dimension);
         }else{
-            arraySequence1 = vector.arraySequence;
+            a = new T[vector.dimension];
+            for (int i = 0; i < vector.dimension; ++i) {
+                a[i] = vector.arraySequence.Get(i);
+            }
+            arraySequence1 = ArraySequence<T>(a, dimension);
         }
-        int a = dimension;
-        if (a>vector.dimension) a = vector.dimension;
-        for (int i = 0; i < a; ++i) {
+        int b = dimension;
+        if (b>vector.dimension) b = vector.dimension;
+        for (int i = 0; i < b; ++i) {
             arraySequence1.InsertAt(arraySequence.Get(i) - vector.arraySequence.Get(i) , i);
         }
         Vector<T> *vector1 = new Vector<T>(arraySequence1);
@@ -65,14 +88,23 @@ public:
     Vector<T> *multVectors(Vector<T> vector){
         if(elementSize != vector.elementSize) return nullptr;
         ArraySequence<T> arraySequence1;
+        T *a;
         if (dimension == vector.dimension || dimension>vector.dimension){
-            arraySequence1 = arraySequence;
+            a = new T[dimension];
+            for (int i = 0; i < dimension; ++i) {
+                a[i] = arraySequence.Get(i);
+            }
+            arraySequence1 = ArraySequence<T>(a, dimension);
         }else{
-            arraySequence1 = vector.arraySequence;
+            a = new T[vector.dimension];
+            for (int i = 0; i < vector.dimension; ++i) {
+                a[i] = vector.arraySequence.Get(i);
+            }
+            arraySequence1 = ArraySequence<T>(a, dimension);
         }
-        int a = dimension;
-        if (a>vector.dimension) a = vector.dimension;
-        for (int i = 0; i < a; ++i) {
+        int b = dimension;
+        if (b>vector.dimension) b = vector.dimension;
+        for (int i = 0; i < b; ++i) {
             arraySequence1.InsertAt(arraySequence.Get(i) * vector.arraySequence.Get(i) , i);
         }
         Vector<T> *vector1 = new Vector<T>(arraySequence1);
@@ -80,7 +112,8 @@ public:
     }
 
     Vector<T> *scalarMultVector(float  a){
-        ArraySequence<T> arraySequence1 = arraySequence;
+        T *b = new T[dimension];
+        ArraySequence<T> arraySequence1 = ArraySequence<T>(b, dimension);
         for (int i = 0; i < dimension; ++i) {
             arraySequence1.InsertAt(arraySequence.Get(i)*a, i);
         }

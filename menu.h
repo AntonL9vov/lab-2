@@ -91,28 +91,6 @@ ostream& operator << (ostream& cout, complex<float> com){
     }
 }
 
-void printMenu(){
-    cout<<"Menu: "<<endl;
-    cout<<"What do you want to do?"<<endl;
-    cout<<"1.  Put vector in memory."<<endl;
-    cout<<"2.  Put matrix in memory."<<endl;
-    cout<<"3.  Show available vectors in memory."<<endl;
-    cout<<"4.  Show available matrices in memory."<<endl;
-    cout<<"5.  Sum two vectors."<<endl;
-    cout<<"6.  Sum two matrices."<<endl;
-    cout<<"7.  Sub two vectors."<<endl;
-    cout<<"8.  Sub two matrices"<<endl;
-    cout<<"9.  Multiply two vectors."<<endl;
-    cout<<"10. Multiply two matrices."<<endl;
-    cout<<"11. Multiply vector on scalar."<<endl;
-    cout<<"12. Multiply matrix on scalar."<<endl;
-    cout<<"13. Change lines in matrix."<<endl;
-    cout<<"14. Multiply line in matrix."<<endl;
-    cout<<"15. Add line to line in matrix."<<endl;
-    cout<<"16. Remove vector from memory."<<endl;
-    cout<<"17. Remove matrix from memory."<<endl;
-}
-
 template<class T>
 void createVector(ArraySequence<Vector<T>*> *array, int dimension){
     cout<<endl;
@@ -126,7 +104,7 @@ void createVector(ArraySequence<Vector<T>*> *array, int dimension){
         arraySequence->Append(getNumber(a));
     }
     auto *vector = new Vector<T>(*arraySequence);
-    cout<<"it is your new vector: "<<*vector<<endl;
+    cout<<"This is your new vector: "<<*vector<<endl;
     array->Append(vector);
 };
 
@@ -136,7 +114,7 @@ void createRandomIntVector(ArraySequence<Vector<int>*> *vectorInt, int dimension
         a[i] = randomInt();
     }
     auto *vector = new Vector<int>(a, dimension);
-    cout<<"it is your new vector: "<<*vector<<endl;
+    cout<<"This is your new vector: "<<*vector<<endl;
     vectorInt->Append(vector);
 }
 
@@ -400,7 +378,7 @@ void printMatrixFromMemory(ArraySequence<Matrix<T>*> *arraySequence) {
                     cout<<"    ";
                 }
                 for (int i = 0; i <  arraySequence->Get(k)->GetLength(); ++i) {
-                    cout<<"... ";
+                    cout<<"...  ";
                 }
                 cout<<endl;
             }
@@ -454,11 +432,154 @@ void showAvailableMatrix(ArraySequence<Matrix<int>*> *matrixInt, ArraySequence<M
     cout<<"---------"<<endl;
 }
 
+template <class T>
+void saveVector(ArraySequence<Vector<T>*> *vectorsArray, Vector<T> *vector){
+    cout<<"Do you want to save vector?"<<endl;
+    cout<<"1. Yes."<<endl;
+    cout<<"2. No."<<endl;
+    int a = GetInt(1,2);
+    if(a == 1) vectorsArray->Append(vector);
+}
+
+template <class T>
+Vector<T> *getVectorFromMemory(ArraySequence<Vector<T>*> *vectorsArray){
+    cout<<"What vector number do you want to use?"<<endl;
+    int a = GetInt(1, vectorsArray->GetLength());
+    auto *vector = vectorsArray->Get(a-1);
+    return vector;
+}
+
+
+template <class T>
+Vector<T> *getVectorForOperation(ArraySequence<Vector<T>*> *vectorsArray){
+    int ch, dimension;
+    cout<<"What vector do you want to use?"<<endl;
+    cout<<"1. My own new vector."<<endl;
+    cout<<"2. Vector from memory."<<endl;
+    int a = GetInt(1,2);
+    Vector<T> *vector;
+    switch (a) {
+        case 1: {
+            cout << "What dimension do you want?" << endl;
+            dimension = GetInt();
+            cout << endl;
+            cout << "Input 1 coordinate:";
+            T b = getNumber(b);
+            T *r = new T[1];
+            r[0] = b;
+            ArraySequence<T> *arraySequence = new ArraySequence<T>(r, 1);
+            for (int i = 0; i < dimension - 1; ++i) {
+                cout << "Input " << i + 2 << " coordinate:";
+                arraySequence->Append(getNumber(b));
+            }
+            vector = new Vector<T>(*arraySequence);
+            cout << "it is your new vector: " << *vector << endl;
+            saveVector(vectorsArray, vector);
+            break;
+        }
+        case 2:
+            printVectorsFromMemory(vectorsArray);
+            vector = getVectorFromMemory(vectorsArray);
+            break;
+        default: break;
+    }
+    return vector;
+};
+
+template <class T>
+void vectorsSum(Vector<T> first, Vector<T> second, ArraySequence<Vector<T>*> *vectorsArray ){
+    Vector<T> *res = first.addVectors(second);
+    cout<<"This is your summed vector: "<<*res<<endl;
+    saveVector(vectorsArray, res);
+}
+
+template <class T>
+void vectorsSub(Vector<T> first, Vector<T> second, ArraySequence<Vector<T>*> *vectorsArray ){
+    Vector<T> *res = first.subVectors(second);
+    cout<<"This is your subtracted vector: "<<*res<<endl;
+    saveVector(vectorsArray, res);
+}
+
+template <class T>
+void vectorsMult(Vector<T> first, Vector<T> second, ArraySequence<Vector<T>*> *vectorsArray ){
+    Vector<T> *res = first.multVectors(second);
+    cout<<"This is your multiplicated vector: "<<*res<<endl;
+    saveVector(vectorsArray, res);
+}
+
+template <class T>
+void vectorsScalarMult(Vector<T> first, ArraySequence<Vector<T>*> *vectorsArray ){
+    cout<<"Input number that you want to multiply on vector: ";
+    float a = getNumber(a);
+    Vector<T> *res = first.scalarMultVector(a);
+    cout<<endl<<"This is your scalar multiplicated vector: "<<*res<<endl;
+    saveVector(vectorsArray, res);
+}
+
+template <class T>
+void chooseOperation(int a, Vector<T> *first, Vector<T> *second, ArraySequence<Vector<T>*> *vectorsArray){
+    switch (a) {
+        case 1:
+            vectorsSum(*first, *second, vectorsArray);
+        break;
+        case 2:
+            vectorsSub(*first, *second, vectorsArray);
+        break;
+        case 3:
+            vectorsMult(*first, *second, vectorsArray);
+        break;
+        default: break;
+    }
+}
+
 void operateWithVectors(ArraySequence<Vector<int>*> *vectorInt, ArraySequence<Vector<float>*> *vectorFloat, ArraySequence<Vector<complex<float>>*> *vectorComplex){
     cout<<"---------"<<endl;
-    cout<<"What do you want to do with vector";
-    cout<<"Sum two vectors";
-    cout<<"Sub two vectors";
+    cout<<"What do you want to do with vector"<<endl;
+    cout<<"1. Sum two vectors."<<endl;
+    cout<<"2. Sub two vectors."<<endl;
+    cout<<"3. Multiply two vectors."<<endl;
+    cout<<"4. Multiply scalar vector."<<endl;
+    int a = GetInt(1,4);
+
+    cout<<"What type of vector do you want?"<<endl;
+    cout<<"1. Int."<<endl;
+    cout<<"2. Float."<<endl;
+    cout<<"3. Complex."<<endl;
+    int b = GetInt(1, 3);
+    switch (b) {
+        case 1: {
+            Vector<int> *first = getVectorForOperation(vectorInt);
+            if(a!=4){
+                Vector<int> *second = getVectorForOperation(vectorInt);
+                chooseOperation(a, first, second, vectorInt);
+            } else{
+                 vectorsScalarMult(*first, vectorInt);
+            }
+        }break;
+        case 2:{
+            Vector<float> *first = getVectorForOperation(vectorFloat);
+            if(a!=4){
+                Vector<float> *second = getVectorForOperation(vectorFloat);
+                chooseOperation(a, first, second, vectorFloat);
+            } else{
+                 vectorsScalarMult(*first, vectorFloat);
+            }
+        } break;
+        case 3:{
+            Vector<complex<float>> *first = getVectorForOperation(vectorComplex);
+            if(a!=4){
+                Vector<complex<float>> *second = getVectorForOperation(vectorComplex);
+                chooseOperation(a, first, second, vectorComplex);
+            }else{
+                vectorsScalarMult(*first, vectorComplex);
+            }
+        } break;
+        default: break;
+    }
+}
+
+void operateWithMatrices(){
+
 }
 
 void menu(){
@@ -502,7 +623,9 @@ void menu(){
             case 4:
                 showAvailableMatrix(&matrixInt, &matrixFloat, &matrixComplex);
                 break;
-            case 5: break;
+            case 5:
+                operateWithVectors(&vectorInt, &vectorFloat, &vectorComplex);
+                break;
             case 6: break;
             case 7: break;
             case 8: break;
