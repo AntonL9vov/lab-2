@@ -98,6 +98,20 @@ public:
         InsertAt(item, index2);
     }
 
+    void deleteElement(int index){
+        if(index<1, index>GetLength()) throw IndexOutOfRange();
+        int len = GetLength();
+        T *a = new T[GetLength()-1];
+        int i = 0;
+        for (; i < index-1; ++i) {
+            a[i] = Get(i);
+        }
+        for (; i < GetLength(); ++i) {
+            a[i-1] = Get(i);
+        }
+        dynamicArray = DynamicArray<T>(a, len-1);
+    }
+
     friend std::ostream& operator<<(std::ostream &out, ArraySequence arraySequence){
         out<<""<<std::endl;
         for (int i = 0; i < arraySequence.GetLength(); ++i) {

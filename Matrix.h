@@ -31,50 +31,47 @@ public:
         arraySequence = arraySequence1;
     }
 
-    Matrix<T> *sumMatrices(Matrix<T> matrix){
-        if(elementSize!=matrix.elementSize) return nullptr;
-        if(length!=matrix.length||height!=matrix.height) return nullptr;
+    Matrix<T> *sumMatrices(Matrix<T> *matrix){
+        if(elementSize!=matrix->elementSize) return nullptr;
+        if(length!=matrix->length||height!=matrix->height) return nullptr;
         T *a = new T[length*height];
         for (int i = 0; i < length*height; ++i) {
-            a[i] = arraySequence.Get(i) + matrix.arraySequence.Get(i);
+            a[i] = arraySequence.Get(i) + matrix->arraySequence.Get(i);
         }
         Matrix<T> *matrix1 = new Matrix<T>(a, length, height);
         return matrix1;
     }
 
-    Matrix<T> *subMatrices(Matrix<T> matrix){
-        if(elementSize!=matrix.elementSize) return nullptr;
-        if(length!=matrix.length||height!=matrix.height) return nullptr;
+    Matrix<T> *subMatrices(Matrix<T> *matrix){
+        if(elementSize!=matrix->elementSize) return nullptr;
+        if(length!=matrix->length||height!=matrix->height) return nullptr;
         T *a = new T[length*height];
         for (int i = 0; i < length*height; ++i) {
-            a[i] = arraySequence.Get(i) - matrix.arraySequence.Get(i);
+            a[i] = arraySequence.Get(i) - matrix->arraySequence.Get(i);
         }
         Matrix<T> *matrix1 = new Matrix<T>(a, length, height);
         return matrix1;
     }
 
-    Matrix<T> *scalarMultMatrix(float b){
-        T *a = new T[length*height];
+    void scalarMultMatrix(float b){
         for (int i = 0; i < length*height; ++i) {
-            a[i] = arraySequence.Get(i)*b;
+            arraySequence.InsertAt(arraySequence.Get(i)*b, i);
         }
-        Matrix<T> *matrix1 = new Matrix<T>(a, length, height);
-        return matrix1;
     }
 
-    Matrix<T> *multMatrices(Matrix<T> matrix){
-        if(elementSize!=matrix.elementSize) return nullptr;
-        if(height!=matrix.length) return nullptr;
-        T *a = new T[matrix.length*height];
+    Matrix<T> *multMatrices(Matrix<T> *matrix){
+        if(elementSize!=matrix->elementSize) return nullptr;
+        if(height!=matrix->length) return nullptr;
+        T *a = new T[matrix->length*height];
         for (int i = 0; i < length; ++i) {
-            for (int j = 0; j < matrix.height; ++j) {
-                a[i*matrix.length + j] = 0;
+            for (int j = 0; j < matrix->height; ++j) {
+                a[i*matrix->length + j] = 0;
                 for (int k = 0; k < height; ++k) {
-                    a[i*matrix.length + j] = a[i*matrix.length + j] + arraySequence.Get(i*length + k) * matrix.arraySequence.Get(k*matrix.length + j);
+                    a[i*matrix->length + j] = a[i*matrix->length + j] + arraySequence.Get(i*length + k) * matrix->arraySequence.Get(k*matrix->length + j);
                 }
             }
         }
-        Matrix<T> *matrix1 = new Matrix<T>(a, matrix.length, height);
+        Matrix<T> *matrix1 = new Matrix<T>(a, matrix->length, height);
         return matrix1;
     }
 
@@ -92,19 +89,17 @@ public:
         }
     }
 
-    void addLineToLine(Matrix<T> matrix, int first, int second){
-        if(elementSize!=matrix.elementSize) throw NotCompatibleTypes();
+    void addLineToLine(int first, int second){
         if(first<1||first>height||second<1||second>height) throw IndexOutOfRange();
         for (int i = 0; i < length; ++i) {
-            arraySequence.InsertAt(arraySequence.Get((first-1)*length + i) + matrix.arraySequence.Get(second-1*length + i), first);
+            arraySequence.InsertAt(arraySequence.Get((first-1)*length + i) + arraySequence.Get((second-1)*length + i), (first-1)*length+i);
         }
     }
 
-    void subLineToLine(Matrix<T> matrix,int first, int second){
-        if(elementSize!=matrix.elementSize) throw NotCompatibleTypes();
+    void subLineToLine(int first, int second){
         if(first<1||first>height||second<1||second>height) throw IndexOutOfRange();
         for (int i = 0; i < length; ++i) {
-            arraySequence.InsertAt(arraySequence.Get((first-1)*length + i) - matrix.arraySequence.Get(second-1*length + i), first);
+            arraySequence.InsertAt(arraySequence.Get((first-1)*length + i) - arraySequence.Get((second-1)*length + i), (first-1)*length+i);
         }
     }
 
