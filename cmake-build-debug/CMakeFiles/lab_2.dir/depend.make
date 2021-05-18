@@ -4,10 +4,12 @@
 CMakeFiles/lab_2.dir/main.cpp.obj: ../ArraySequence.h
 CMakeFiles/lab_2.dir/main.cpp.obj: ../DynamicArray.h
 CMakeFiles/lab_2.dir/main.cpp.obj: ../IndexOutOfRangeException.h
+CMakeFiles/lab_2.dir/main.cpp.obj: ../LinkedList.h
 CMakeFiles/lab_2.dir/main.cpp.obj: ../Matrix.h
 CMakeFiles/lab_2.dir/main.cpp.obj: ../NotCompatibleTypesException.h
 CMakeFiles/lab_2.dir/main.cpp.obj: ../Sequence.h
 CMakeFiles/lab_2.dir/main.cpp.obj: ../Vector.h
 CMakeFiles/lab_2.dir/main.cpp.obj: ../main.cpp
 CMakeFiles/lab_2.dir/main.cpp.obj: ../menu.h
+CMakeFiles/lab_2.dir/main.cpp.obj: ../test.h
 

@@ -42,7 +42,7 @@ int getNumber(int a){
 }
 
 float getNumber(float a){
-    int b;
+    float b;
     cin>>b;
     return b;
 }
@@ -639,6 +639,10 @@ Matrix<T> *getMatrixForOperation(ArraySequence<Matrix<T>*> *matricesArray){
 
 template <class T>
 void matricesSum(Matrix<T> *first, Matrix<T> *second, ArraySequence<Matrix<T>*> *matricesArray){
+    if(first->GetHeight() != second->GetHeight() || first->GetLength() != second->GetLength()){
+        cout<<"Matrices cant be summed"<<endl;
+        return;
+    }
     Matrix<T> *res = first->sumMatrices(second);
     cout<<"This is your summed matrix"<<*res;
     saveMatrix(matricesArray, res);
@@ -646,6 +650,10 @@ void matricesSum(Matrix<T> *first, Matrix<T> *second, ArraySequence<Matrix<T>*> 
 
 template <class T>
 void matricesSub(Matrix<T> *first, Matrix<T> *second, ArraySequence<Matrix<T>*> *matricesArray){
+    if(first->GetHeight() != second->GetHeight() || first->GetLength() != second->GetLength()){
+        cout<<"Matrices cant be subtracted"<<endl;
+        return;
+    }
     Matrix<T> *res = first->subMatrices(second);
     cout<<"This is your subtracted matrix"<<*res;
     saveMatrix(matricesArray, res);
@@ -653,6 +661,10 @@ void matricesSub(Matrix<T> *first, Matrix<T> *second, ArraySequence<Matrix<T>*> 
 
 template <class T>
 void matricesMult(Matrix<T> *first, Matrix<T> *second, ArraySequence<Matrix<T>*> *matricesArray){
+    if(first->GetHeight() != second->GetLength()){
+        cout<<"Matrices cant be multiplied"<<endl;
+        return;
+    }
     Matrix<T> *res = first->multMatrices(second);
     cout<<"This is your multiplied  matrix"<<*res;
     saveMatrix(matricesArray, res);

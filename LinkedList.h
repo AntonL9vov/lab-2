@@ -92,8 +92,10 @@ public:
     }
 
     LinkedList<T> *GetSubList(int startIndex, int endIndex){
-        if(head == nullptr) throw IndexOutOfRange();
-        if (endIndex>len-1||startIndex>len-1||startIndex<0||endIndex<0||startIndex==endIndex) throw IndexOutOfRange();
+        if(head == nullptr)
+            throw IndexOutOfRange();
+        if(endIndex>len-1||startIndex>len-1||startIndex<0||endIndex<0||startIndex==endIndex)
+            throw IndexOutOfRange();
         if(startIndex>endIndex){
             int a = startIndex;
             startIndex = endIndex;
@@ -118,8 +120,10 @@ public:
     }
 
     void InsertAt(T item, int index){
-        if(head == nullptr) throw IndexOutOfRange();
-        if (index>len-1||index<0) throw IndexOutOfRange();
+        if(head == nullptr)
+            throw IndexOutOfRange();
+        if (index>len-1||index<0)
+            throw IndexOutOfRange();
         element *element1 = new element;
         element1 = head;
         for (int i = 0; i < index; ++i) {

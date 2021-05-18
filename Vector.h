@@ -48,7 +48,7 @@ public:
             for (int i = 0; i < vector.dimension; ++i) {
                 a[i] = vector.arraySequence.Get(i);
             }
-            arraySequence1 = ArraySequence<T>(a, dimension);
+            arraySequence1 = ArraySequence<T>(a, vector.dimension);
         }
         int b = dimension;
         if (b>vector.dimension) b = vector.dimension;
@@ -74,7 +74,7 @@ public:
             for (int i = 0; i < vector.dimension; ++i) {
                 a[i] = vector.arraySequence.Get(i);
             }
-            arraySequence1 = ArraySequence<T>(a, dimension);
+            arraySequence1 = ArraySequence<T>(a, vector.dimension);
         }
         int b = dimension;
         if (b>vector.dimension) b = vector.dimension;
@@ -100,7 +100,7 @@ public:
             for (int i = 0; i < vector.dimension; ++i) {
                 a[i] = vector.arraySequence.Get(i);
             }
-            arraySequence1 = ArraySequence<T>(a, dimension);
+            arraySequence1 = ArraySequence<T>(a, vector.dimension);
         }
         int b = dimension;
         if (b>vector.dimension) b = vector.dimension;

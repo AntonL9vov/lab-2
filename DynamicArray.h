@@ -47,17 +47,9 @@ public:
         }
     }
 
-    /*~DynamicArray(){
-        delete[] array;
-    }*/
-
     T Get(int index) {
         if(index>length||index<0) throw IndexOutOfRange();
         return array[index];
-    }
-
-    int GetSize() {
-        return length;
     }
 
     void Set(int index, T value) {

@@ -32,8 +32,10 @@ public:
     }
 
     Matrix<T> *sumMatrices(Matrix<T> *matrix){
-        if(elementSize!=matrix->elementSize) return nullptr;
-        if(length!=matrix->length||height!=matrix->height) return nullptr;
+        if(elementSize!=matrix->elementSize)
+            return nullptr;
+        if(length!=matrix->length||height!=matrix->height)
+            return nullptr;
         T *a = new T[length*height];
         for (int i = 0; i < length*height; ++i) {
             a[i] = arraySequence.Get(i) + matrix->arraySequence.Get(i);
@@ -43,8 +45,10 @@ public:
     }
 
     Matrix<T> *subMatrices(Matrix<T> *matrix){
-        if(elementSize!=matrix->elementSize) return nullptr;
-        if(length!=matrix->length||height!=matrix->height) return nullptr;
+        if(elementSize!=matrix->elementSize)
+            return nullptr;
+        if(length!=matrix->length||height!=matrix->height)
+            return nullptr;
         T *a = new T[length*height];
         for (int i = 0; i < length*height; ++i) {
             a[i] = arraySequence.Get(i) - matrix->arraySequence.Get(i);
