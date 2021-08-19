@@ -19,6 +19,10 @@ public:
         linkedList = LinkedList();
     }
 
+    ~LinkedListSequence(){
+        delete &linkedList;
+    }
+
     LinkedListSequence(const LinkedList <T> & list ){
         linkedList = LinkedList(list);
     }
@@ -33,6 +37,12 @@ public:
         if(linkedList.GetLength() == 0)
             throw IndexOutOfRange();
         return linkedList.GetLast();
+    }
+
+    Element<T> *GetElement(int index){
+        if (linkedList.GetLength() == 0)
+            throw IndexOutOfRange;
+        return linkedList.GetElement(index);
     }
 
     T Get(int index){

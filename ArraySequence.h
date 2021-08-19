@@ -22,6 +22,10 @@ public:
         dynamicArray = DynamicArray<T>();
     }
 
+    ~ArraySequence(){
+        delete &dynamicArray;
+    }
+
     ArraySequence(const DynamicArray<T> & list){
         dynamicArray = DynamicArray<T>(list);
     }
@@ -68,6 +72,7 @@ public:
     void Append(T *item){
         Append(*item);
     }
+
     void Prepend(T item){
         dynamicArray.Resize(GetLength());
         for (int i = GetLength()-1; i > 0; --i) {

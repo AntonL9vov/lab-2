@@ -33,13 +33,18 @@ public:
         }
     }
 
+    ~DynamicArray(){
+        delete array;
+    }
+
     DynamicArray(int size) {
         length = size;
         array = new T[size];
-        for(int i = 0; i<size; i++) array[i] = 0;
+        for(int i = 0; i<size; i++)
+            array[i] = 0;
     }
 
-    DynamicArray(const DynamicArray<T> &dynamicArray ) {
+    DynamicArray(const DynamicArray<T> &dynamicArray) {
         length = 0;
         array = new T[dynamicArray.length];
         for(; length<dynamicArray.length; length++){
@@ -48,7 +53,8 @@ public:
     }
 
     T Get(int index) {
-        if(index>length||index<0) throw IndexOutOfRange();
+        if(index>length||index<0)
+            throw IndexOutOfRange();
         return array[index];
     }
 

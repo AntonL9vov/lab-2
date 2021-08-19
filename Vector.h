@@ -135,7 +135,8 @@ public:
     }
 
     T GetCoordinate(int i){
-        if (i<1||i>dimension) throw IndexOutOfRange();
+        if (i<1||i>dimension)
+            throw IndexOutOfRange();
         return arraySequence.Get(i-1);
     }
 };

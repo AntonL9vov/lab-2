@@ -10,22 +10,26 @@
 #include <iostream>
 
 template <class T>
+class Element{
+public:
+    T data;
+    Element<T> *next;
+    Element<T> *prev;
+};
+
+template <class T>
 class LinkedList{
 private:
-    typedef struct Element {
-        T data;
-        struct Element *next;
-    } element;
-
     int len = 0;
 
-    element *head = nullptr;
-    element *end = nullptr;
+    Element<T> *head = nullptr;
+    Element<T> *end = nullptr;
 public:
     void Prepend(T item){
-        element *element1 = new element;
+        Element<T> *element1 = new Element<T>;
         element1->data = item;
         element1->next = nullptr;
+        element1->prev = nullptr;
         len++;
         if (head == nullptr){
             head = element1;
@@ -37,9 +41,10 @@ public:
     }
 
     void Append(T item){
-       element *element1 = new element;
+       Element<T> *element1 = new Element<T>;
        element1->data = item;
        element1->next = nullptr;
+       element1->prev = end;
 
        len++;
 
@@ -62,12 +67,33 @@ public:
     LinkedList (){
     }
 
+    ~LinkedList(){
+        Element<T> *element = head;
+        Element<T> *element1 = head;
+        while (element){
+            element1 = element;
+            element = element->next;
+            delete element1;
+        }
+    }
+
     LinkedList (const LinkedList <T> & list){
-        element *element1 = list.head;
+        Element<T> *element1 = list.head;
         for (int i = 0; i < list.len; ++i) {
             Append(element1->data);
             element1 = element1->next;
         }
+    }
+
+    Element<T> *GetElement(int index){
+        if(head == nullptr) throw IndexOutOfRange();
+        if (index>len-1||index<0) throw IndexOutOfRange();
+        Element<T> *element1 = new Element<T>;
+        element1 = head;
+        for (int i = 0; i < index; ++i) {
+            element1 = element1->next;
+        }
+        return element1;
     }
 
     T GetFirst(){
@@ -83,7 +109,7 @@ public:
     T Get(int index){
         if(head == nullptr) throw IndexOutOfRange();
         if (index>len-1||index<0) throw IndexOutOfRange();
-        element *element1 = new element;
+        Element<T> *element1 = new Element<T>;
         element1 = head;
         for (int i = 0; i < index; ++i) {
             element1 = element1->next;
@@ -101,7 +127,7 @@ public:
             startIndex = endIndex;
             endIndex = a;
         }
-        element *element1 = new element;
+        Element<T> *element1 = new Element<T>;
         element1 = head;
         for (int i = 0; i < startIndex; ++i) {
             element1 = element1->next;
@@ -124,12 +150,12 @@ public:
             throw IndexOutOfRange();
         if (index>len-1||index<0)
             throw IndexOutOfRange();
-        element *element1 = new element;
+        Element<T> *element1 = new Element<T>;
         element1 = head;
         for (int i = 0; i < index; ++i) {
             element1 = element1->next;
         }
-        element *element2 = new element;
+        Element<T> *element2 = new Element<T>;
         element2->data = item;
         element2->next = element1->next->next;
         element1->next = element2;
@@ -144,6 +170,4 @@ public:
         len = len + list->len;
         return linkedList;
     }
-
-
 };
